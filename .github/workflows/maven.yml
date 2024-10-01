@@ -24,7 +24,7 @@ jobs:
         export JAVA_HOME=$PWD/jbrsdk-17.0.9-linux-x64-b1087.7
         export PATH=$JAVA_HOME/bin:$PATH
         java -version
-        mvn clean test -DargLine="-Xmx2024m"
+        mvn clean test -e -DargLine="-Xmx2024m"
       shell: bash
 
 
