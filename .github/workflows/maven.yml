@@ -26,8 +26,9 @@ jobs:
         curl -L -o jbr.tar.gz https://cache-redirector.jetbrains.com/intellij-jbr/jbr_fd-17.0.9-linux-x64-b1087.7.tar.gz
         tar -xzf jbr.tar.gz
         echo `ls -l`
-        export JAVA_HOME=$PWD/jbr
+        export JAVA_HOME=$PWD/jbr_fd-17.0.9-linux-x64-b1087.7
         export PATH=$JAVA_HOME/bin:$PATH
+        echo `$PATH`
 
     - name: Verify Java version
       run: java -version
