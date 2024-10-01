@@ -1,18 +1,10 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Java CI with Maven
 
 on:
   push:
     branches: [ "for_action" ]
   pull_request:
-    branches: [ "for_action" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -21,16 +13,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up JBR17
       run: |
-        curl -L -o jbr.tar.gz https://cache-redirector.jetbrains.com/intellij-jbr/jbr_fd-17.0.9-linux-x64-b1087.7.tar.gz
+        curl -L -o jbr.tar.gz https://cache-redirector.jetbrains.com/intellij-jbr/jbrsdk-17.0.9-linux-x64-b1087.7.tar.gz
         tar -xzf jbr.tar.gz
         echo `ls -l`
-        export JAVA_HOME=$PWD/jbr_fd-17.0.9-linux-x64-b1087.7
-        export PATH=$JAVA_HOME/bin:$PATH
-        java -version
-        mvn clean test
-      shell: bash
+        echo "JAVA_HOME=$PWD/jbrsdk-17.0.9-linux-x64-b1087.7" >> $GITHUB_ENV
+        echo "PATH=$PWD/jbr_fd-17.0.9-linux-x64-b1087.7/bin:$PATH" >> $GITHUB_ENV
+
+    - name: Verify Java version
+      run: java -version
+
+    - name: Build with Maven
+      run: mvn clean test
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
