@@ -13,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        ref: mybatis_anno  # 指定要检出的分支
 
     - name: Set up JBR17
       run: |
