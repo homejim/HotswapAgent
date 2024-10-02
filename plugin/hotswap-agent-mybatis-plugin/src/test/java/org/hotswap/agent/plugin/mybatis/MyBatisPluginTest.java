@@ -29,6 +29,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.Reader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static org.junit.Assert.assertEquals;
 
@@ -40,7 +41,14 @@ public class MyBatisPluginTest extends BaseTest {
     public static void setup() throws Exception {
         // create an SqlSessionFactory
         File f = Resources.getResourceAsFile("org/hotswap/agent/plugin/mybatis/Mapper1.xml");
-        Files.copy(f.toPath(), f.toPath().getParent().resolve("Mapper.xml"));
+        Path path = f.toPath().getParent().resolve("Mapper.xml");
+        Files.copy(f.toPath(), path);
+
+        File file = new File(path.toString());
+        if (!file.exists()) {
+            throw new RuntimeException("文件 copy 失败");
+        }
+
         try (Reader reader = Resources.getResourceAsReader("org/hotswap/agent/plugin/mybatis/mybatis-config.xml")) {
           sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
         }
@@ -53,6 +61,9 @@ public class MyBatisPluginTest extends BaseTest {
     @AfterClass
     public static void tearDown() throws Exception {
         File tmp = Resources.getResourceAsFile("org/hotswap/agent/plugin/mybatis/Mapper.xml");
+        if (!tmp.exists()) {
+            return;
+        }
         tmp.delete();
     }
 
