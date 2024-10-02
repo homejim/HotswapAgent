@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        ref: for_action  # 指定要检出的分支
+        ref: for_action
 
     - name: Set up JBR17
       run: |
@@ -24,7 +24,7 @@ jobs:
         export JAVA_HOME=$PWD/jbrsdk-17.0.9-linux-x64-b1087.7
         export PATH=$JAVA_HOME/bin:$PATH
         java -version
-        mvn clean install -X
+        mvn clean install && mvn test
       shell: bash
 
 
