@@ -52,8 +52,8 @@ public class MyBatisPluginTest extends BaseTest {
 
     @AfterClass
     public static void tearDown() throws Exception {
-//        File tmp = Resources.getResourceAsFile("org/hotswap/agent/plugin/mybatis/Mapper.xml");
-//        tmp.delete();
+        File tmp = Resources.getResourceAsFile("org/hotswap/agent/plugin/mybatis/Mapper.xml");
+        tmp.delete();
     }
 
     @Test
