@@ -129,19 +129,18 @@ public class MyBatisTransformers {
 
     @OnClassLoadEvent(classNameRegexp = "org.apache.ibatis.session.SqlSessionFactoryBuilder")
     public static void patchSqlSessionFactoryBuilder(CtClass ctClass, ClassPool classPool) throws NotFoundException, CannotCompileException {
-        if (MyBatisRefreshCommands.isMybatisPlus) {
-            return;
-        }
-        // add $$ha$factoryBean field
-        CtClass objClass = classPool.get("java.lang.Object");
-        CtField factoryBeanField = new CtField(objClass, FACTORYBEAN_FIELD, ctClass);
-        ctClass.addField(factoryBeanField);
+        if (!MyBatisRefreshCommands.isMybatisPlus) {
+            // add $$ha$factoryBean field
+            CtClass objClass = classPool.get("java.lang.Object");
+            CtField factoryBeanField = new CtField(objClass, FACTORYBEAN_FIELD, ctClass);
+            ctClass.addField(factoryBeanField);
 
-        CtMethod setMethod = CtNewMethod.make(
-                "public void " + FACTORYBEAN_SET_METHOD + "(Object factoryBean) {" +
-                        "this." + FACTORYBEAN_FIELD + " = factoryBean;" +
-                        "}", ctClass);
-        ctClass.addMethod(setMethod);
+            CtMethod setMethod = CtNewMethod.make(
+                    "public void " + FACTORYBEAN_SET_METHOD + "(Object factoryBean) {" +
+                            "this." + FACTORYBEAN_FIELD + " = factoryBean;" +
+                            "}", ctClass);
+            ctClass.addMethod(setMethod);
+        }
 
         CtMethod buildMethod = ctClass.getDeclaredMethod("build",
                 new CtClass[]{classPool.get("org.apache.ibatis.session.Configuration")});
