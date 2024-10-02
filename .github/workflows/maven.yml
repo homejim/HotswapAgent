@@ -2,9 +2,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "for_action" ]
+    branches: [ "for_action,spring" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "for_action" ]
 
 jobs:
   build:
