@@ -30,7 +30,7 @@ jobs:
         export JAVA_HOME=$PWD/jbrsdk-17.0.9-linux-x64-b1087.7
         export PATH=$JAVA_HOME/bin:$PATH
         java -version
-        mvn clean install -DtestFailureIgnore=true
+        mvn install -DskipTests && cd plugin/hotswap-agent-mybatis-plugin && mvn test
       shell: bash
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
