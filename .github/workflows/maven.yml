@@ -1,0 +1,35 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "for_action","master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: master
+
+    - name: Set up JBR17
+      run: |
+        curl -L -o jdk.tar.gz https://cache-redirector.jetbrains.com/intellij-jbr/jbr_jcef-17.0.9-linux-x64-b1087.7.tar.gz
+        tar -xzf jdk.tar.gz
+        ls -l
+        export JAVA_HOME=$PWD/jbr_jcef-17.0.9-linux-x64-b1087.7
+        export PATH=$JAVA_HOME/bin:$PATH
+        java -version
+      shell: bash
+
+    - name: Maven install
+      run: |
+        export JAVA_HOME=$PWD/jbr_jcef-17.0.9-linux-x64-b1087.7
+        export PATH=$JAVA_HOME/bin:$PATH
+        java -version
+        mvn clean install
+      shell: bash
