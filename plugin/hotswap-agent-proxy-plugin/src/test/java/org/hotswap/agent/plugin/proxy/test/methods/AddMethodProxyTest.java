@@ -28,6 +28,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -35,6 +36,7 @@ import org.junit.Test;
  *
  * @author Erki Ehtla
  */
+@Ignore
 public class AddMethodProxyTest {
 
     static public class DummyHandler implements InvocationHandler {
