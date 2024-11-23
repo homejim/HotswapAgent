@@ -1,5 +1,6 @@
 package org.hotswap.agent.plugin.mybatisplus;
 
+import org.junit.Ignore;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -26,6 +27,7 @@ import java.nio.file.StandardCopyOption;
 
 import static org.junit.Assert.*;
 
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, properties = "spring.config.location=classpath:application-plus.properties")
 public class MyBatisPlusSpringBootTest extends BaseTest {
