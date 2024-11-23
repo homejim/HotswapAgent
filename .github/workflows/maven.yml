@@ -31,5 +31,5 @@ jobs:
         export PATH=$JAVA_HOME/bin:$PATH
         java -version
         # mvn install  -Dmaven.test.skip=true && cd plugin/hotswap-agent-mybatis-plugin && mvn test
-        mvn install -DskipTests  -pl plugin/hotswap-agent-mybatis-plugin
+        mvn install -DskipTests  && mvn test -pl plugin/hotswap-agent-mybatis-plugin
       shell: bash
