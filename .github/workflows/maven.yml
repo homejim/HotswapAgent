@@ -2,9 +2,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "for_action","spring" ]
+    branches: [ "master","master" ]
   pull_request:
-    branches: [ "for_action" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        ref: spring
+        ref: master
 
     - name: Set up JBR17
       run: |
