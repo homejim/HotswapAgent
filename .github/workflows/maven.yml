@@ -18,18 +18,18 @@ jobs:
 
     - name: Set up JBR17
       run: |
-        curl -L -o jdk.tar.gz https://github.com/TravaOpenJDK/trava-jdk-11-dcevm/releases/download/dcevm-11.0.15%2B1/Openjdk11u-dcevm-linux-x64.tar.gz
+        curl -L -o jdk.tar.gz  curl -L -o jdk.tar.gz https://cache-redirector.jetbrains.com/intellij-jbr/jbr_jcef-17.0.9-linux-x64-b1087.7.tar.gz
         tar -xzf jdk.tar.gz
-        export JAVA_HOME=$PWD/dcevm-11.0.15+1
+        export JAVA_HOME=$PWD/jbr_jcef-17.0.9-linux-x64-b1087.7
         export PATH=$JAVA_HOME/bin:$PATH
         java -version
       shell: bash
 
     - name: Maven install
       run: |
-        export JAVA_HOME=$PWD/dcevm-11.0.15+1
+        export JAVA_HOME=$PWD/jbr_jcef-17.0.9-linux-x64-b1087.7
         export PATH=$JAVA_HOME/bin:$PATH
         java -version
-        # mvn install  -Dmaven.test.skip=true && cd ./plugin/hotswap-agent-mybatis-plus-plugin && mvn test
-        mvn install -DskipTests && cd plugin/hotswap-agent-mybatis-plugin && mvn test
+        # mvn install  -Dmaven.test.skip=true && cd plugin/hotswap-agent-mybatis-plugin && mvn test
+        mvn install -DskipTests  -pl hotswap-agent-mybatis-plugin
       shell: bash
