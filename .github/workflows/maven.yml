@@ -30,5 +30,6 @@ jobs:
         export JAVA_HOME=$PWD/dcevm-11.0.15+1
         export PATH=$JAVA_HOME/bin:$PATH
         java -version
-        mvn install  -Dmaven.test.skip=true && cd ./plugin/hotswap-agent-mybatis-plus-plugin && mvn test
+        # mvn install  -Dmaven.test.skip=true && cd ./plugin/hotswap-agent-mybatis-plus-plugin && mvn test
+        mvn install -DskipTests && cd plugin/hotswap-agent-mybatis-plugin && mvn test
       shell: bash
